@@ -1,0 +1,551 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage{etaremune}
+
+% Simpler bibsection for CV sections
+% (thanks to natbib for inspiration)
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newenvironment{bibsection}%
+        {\vspace{-1.6\baselineskip}\begin{etaremune}[leftmargin=1.6em]{%
+       \setlength{\leftmargin}{\bibhang}%
+       \setlength{\itemindent}{-\leftmargin}%
+       \setlength{\itemsep}{\bibsep}%
+       \setlength{\parsep}{\z@}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{etaremune}\vspace{-.6\baselineskip}}
+\makeatother
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+%% This gives us fun enumeration environments. compactitem will be nice.
+\usepackage{paralist}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=blue,urlcolor=blue,
+            anchorcolor=blue,citecolor=blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+%
+% Usage: \makeheading{name}
+%
+% Place at top of document. It should be the first thing.
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+%
+% Follow this section IMMEDIATELY with the first line of the section
+% text. Do not put whitespace in between. That is, do this:
+%
+%       \section{My Information}
+%       Here is my information.
+%
+% and NOT this:
+%
+%       \section{My Information}
+%
+%       Here is my information.
+%
+% Otherwise the top of the section header will not line up with the top
+% of the section. Of course, using a single comment character (%) on
+% empty lines allows for the function of the first example with the
+% readability of the second example.
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactitem}[#1]}{\end{compactitem}}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{compactitem}[#1]}
+        {\end{compactitem}\vspace{-.6\baselineskip}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{Jonathan E. Moussa}
+
+\section{Contact Information}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.95in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+\href{https://molssi.org/}{Molecular Sciences Software Institute} & \textit{Cell:} (508) 498-1920 \\
+ 1880 Pratt Drive, Suite 1100 & \textit{E-mail:} \href{mailto:jemoussa@vt.edu}{jemoussa@vt.edu}  \\
+ Blacksburg, VA 24060
+\end{tabular}
+
+\section{Citizenship}
+%
+USA
+
+\section{Research Interests}
+%
+Computational physics, computational materials science, scientific computing, condensed matter physics,
+ electronic structure theory, quantum chemistry, quantum information theory, quantum error correction, quantum simulation,
+ numerical analysis, numerical linear algebra, classical algorithms, quantum algorithms.
+
+\section{Education}
+%
+\href{http://www.berkeley.edu/}{\textbf{The University of California at Berkeley}}, Berkeley, CA, USA
+\begin{outerlist}
+
+\item[] Ph.D., \href{http://www.physics.berkeley.edu/} {Physics}, May 2008
+        \begin{innerlist}
+        \item Thesis Topic: \emph{Theoretical study of electron-phonon superconductivity}
+        \item Adviser:
+              \href{http://civet.berkeley.edu/cohen/mlcohen/}
+                   {Professor Marvin L. Cohen}
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\href{http://www.wpi.edu/}{\textbf{Worcester Polytechnic Institute}}, Worcester, MA, USA
+\begin{outerlist}
+
+\item[] M.S.,
+        \href{http://www.wpi.edu/academics/Depts/Physics/}
+             {Physics}, May 2004
+        \begin{innerlist}
+        \item Thesis Topic: \emph{The Schroedinger-Poisson selfconsistency in layered quantum semiconductor structures}
+        \item Adviser:
+              \href{http://users.wpi.edu/~lrram/}
+                   {Professor L. Ramdas Ram-Mohan}
+        \end{innerlist}
+
+\item[] B.S.,
+        \href{http://www.wpi.edu/academics/Depts/Math/}
+             {Mathematics} and
+        \href{http://www.wpi.edu/academics/Depts/Physics/}
+             {Physics}, May 2001
+
+\end{outerlist}
+
+\section{Job Experience}
+%
+\textbf{Software Scientist} \hfill {July 2018 to present}
+\begin{innerlist}
+
+\item[] \href{https://molssi.org/}{Molecular Sciences Software Institute}, Blacksburg, VA USA
+\end{innerlist}
+
+\textbf{Staff Scientist} \hfill {November 2014 to July 2018}
+\begin{innerlist}
+
+\item[] {Nonconventional Computing Technologies Department},\\
+        {Center for Computing Research},\\
+        \href{http://www.sandia.gov/}{Sandia National Laboratories}
+\end{innerlist}
+
+\textbf{Postdoctoral Researcher} \hfill {August 2011 to November 2014}
+\begin{innerlist}
+
+\item[] {Advanced Device Technologies Department},\\
+        {Center for Computing Research},\\
+        \href{http://www.sandia.gov/}{Sandia National Laboratories}
+\end{innerlist}
+
+\textbf{Postdoctoral Researcher} \hfill {July 2008 to July 2011}
+\begin{innerlist}
+
+\item[] \href{http://tesla.ices.utexas.edu/}{Center for Computational Materials},\\
+        \href{http://www.ices.utexas.edu/}{Institute for Computational Engineering and Sciences},\\
+        \href{http://www.utexas.edu/}{The University of Texas at Austin}
+\end{innerlist}
+
+\textbf{Graduate Student} \hfill {August 2002 to June 2008}
+\begin{innerlist}
+
+\item[] \href{http://physics.berkeley.edu/}{Physics Department},\\
+        \href{http://www.berkeley.edu/}{The University of California at Berkeley}
+\end{innerlist}
+
+\textbf{Summer Intern} \hfill {Summers of 2000 and 2002}
+\begin{innerlist}
+
+\item[] \href{http://www.wpafb.af.mil/afrl/ry}{Air Force Research Laboratory's Sensors Directorate}, \\
+\href{http://www.wpafb.af.mil/}{Wright Patterson Air Force Base}
+\end{innerlist}
+
+\textbf{Programming Consultant} \hfill {August 1998 to June 2002}
+\begin{innerlist}
+
+\item[] Quantum Semiconductor Algorithms, Northborough, MA USA
+\end{innerlist}
+
+\section{H-index} \textbf{12} (\href{https://scholar.google.com/citations?user=rkZB3poAAAAJ&hl=en&oi=sra}{Google Scholar})
+
+\section{Publications} \begin{bibsection}
+
+    \item Hardy, W. J., C. T. Harris1, Y.-H. Su, Y. Chuang, \textbf{J. Moussa}, L. N. Maurer, J.-Y. Li, T.-M. Lu, and D. R. Luhman. Single and double hole quantum dots in strained Ge/SiGe quantum wells.
+    \emph{Nanotechnology} 30:215202 (2019). \doi{10.1088/1361-6528/ab061e}.
+
+    \item Chou, C.-T.,  N. T. Jacobson, \textbf{J. E. Moussa},  A. D. Baczewski,  Y. Chuang, C.-Y. Liu,  J.-Y. Li, and T. M. Lu. Weak anti-localization of two-dimensional holes in germanium beyond the diffusive regime.
+    \emph{Nanoscale} 10:20559 (2018). \doi{10.1039/C8NR05677C}.
+
+    \item \textbf{Moussa, J. E.}. Minimax rational approximation of the Fermi-Dirac distribution.
+    \emph{The Journal of  Chemical Physics} 145:164108 (2016). \doi{10.1063/1.4965886}.
+
+    \item \textbf{Moussa, J. E.}. Transversal Clifford gates on folded surface codes.
+    \emph{Physical Review A} 94:042316 (2016). \doi{10.1103/PhysRevA.94.042316}.
+
+    \item \textbf{Moussa, J. E.}. Quantum circuits for qubit fusion.
+    \emph{Quantum Information and Computation} 16:1113 (2016). \href{https://arxiv.org/abs/1512.06132}{arXiv:1512.06132}.
+
+    \item Parekh, O., J. Wendt, L. Shulenburger, A. Landahl, \textbf{J. Moussa}, and J. Aidun. Benchmarking Adiabatic Quantum Optimization for Complex Network Analysis.
+    \emph{Journal of Intelligence Community Research and Development} (2015). \\ \href{https://arxiv.org/abs/1604.00319}{arXiv:1604.00319}.
+
+    \item Gamble, J. K., N. T. Jacobson, E. Nielsen, A. D. Baczewski, \textbf{J. E. Moussa}, I. Monta\~{n}o, and R. P. Muller. Multivalley effective mass theory simulation of donors in silicon.
+     \emph{Physical Review B}, 91:235318 (2015). \doi{10.1103/PhysRevB.91.235318}.
+
+    \item Chandra, R., N. T. Jacobson, \textbf{J. E. Moussa}, S. H. Frankel, and S. Kais. Quadratic constrained mixed discrete optimization with an adiabatic quantum optimizer.
+     \emph{Physical Review A}, 90:012308 (2014). \doi{10.1103/PhysRevA.90.012308}.
+
+    \item \textbf{Moussa, J. E.}. Cubic-scaling algorithm and self-consistent field for the random-phase approximation with second-order screened exchange.
+     \emph{The Journal of Chemical Physics}, 140:014107 (2014). \doi{10.1063/1.4855255}.
+
+    \item \textbf{Moussa, J. E.}, S. M. Foiles, and P. A. Schultz.
+         Simulation and modeling of the electronic structure of GaAs damage clusters.
+         \emph{Journal of Applied Physics}, 113:093706 (2013). \doi{10.1063/1.4794164}.
+
+    \item \textbf{Moussa, J. E.}.
+         Comment on ``Fast and Accurate Modeling of Molecular Atomization Energies with Machine Learning''.
+         \emph{Physical Review Letters}, 109:059801 (2012). \doi{10.1103/PhysRevLett.109.059801}.
+
+    \item \textbf{Moussa, J. E.}, P. A. Schultz, and J. R. Chelikowsky.
+         Analysis of the Heyd-Scuseria-Ernzerhof density functional parameter space.
+         \emph{The Journal of Chemical Physics}, 136:204117 (2012). \doi{10.1063/1.4722993}.
+
+    \item \textbf{Moussa, J. E.}, N. Marom, N. Sai, and J. R. Chelikowsky.
+         Theoretical Design of a Shallow Donor in Diamond by Lithium-Nitrogen Codoping.
+         \emph{Physical Review Letters}, 108:226404 (2012). \doi{10.1103/PhysRevLett.108.226404}.
+
+    \item Marom, N., \textbf{J. E. Moussa}, X. Ren, A. Tkatchenko, and J. R. Chelikowsky.
+         Electronic structure of dye-sensitized TiO$_2$ clusters from many-body perturbation theory.
+         \emph{Physical Review B}, 84:245115 (2011). \doi{10.1103/PhysRevB.84.245115}.
+
+    \item Marom, N., X. Ren, \textbf{J. E. Moussa}, J. R. Chelikowsky, and L. Kronik.
+         Electronic structure of copper phthalocyanine from $G_0 W_0$ calculations.
+         \emph{Physical Review B}, 84:195143 (2011). \doi{10.1103/PhysRevB.84.195143}.
+
+    \item \textbf{Moussa, J. E.}, J. Noffsinger, and M. L. Cohen.
+         Possible thermodynamic stability and superconductivity of Be$_2$B$_x$C$_{1-x}$.
+         \emph{Physical Review B}, 78:104506 (2008). \doi{10.1103/PhysRevB.78.104506}.
+
+    \item \textbf{Moussa, J. E.} and M. L. Cohen.
+         Using molecular fragments to estimate electron-phonon coupling and possible superconductivity in covalent materials.
+         \emph{Physical Review B}, 78:064502 (2008). \doi{10.1103/PhysRevB.78.064502}.
+
+    \item \textbf{Moussa, J. E.} and M. L. Cohen.
+         Constraints on $T_c$ for superconductivity in heavily boron-doped diamond.
+         \emph{Physical Review B}, 77:064518 (2008). \\ \doi{10.1103/PhysRevB.77.064518}.
+
+    \item \textbf{Moussa, J. E.} and M. L. Cohen.
+         Two bounds on the maximum phonon-mediated superconducting transition temperature.
+         \emph{Physical Review B}, 74:094520 (2006). \\ \doi{10.1103/PhysRevB.74.094520}.
+
+    \item Ram-Mohan, L. R., K. H. Yoo, and \textbf{J. Moussa}.
+         The Schr\"odinger-Poisson self-consistency in layered quantum semiconductor structures.
+         \emph{Journal of Applied Physics}, 95:3081 (2004). \doi{10.1063/1.1649458}.
+
+    \item \textbf{Moussa, J.}, L. R. Ram-Mohan, A. C. H. Rowe, and S. A. Solin.
+        Response of an extraordinary magnetoresistance read head to a magnetic bit.
+        \emph{Journal of Applied Physics}, 94:1110 (2003). \doi{10.1063/1.1576897}.
+
+    \item \textbf{Moussa, J.}, L. R. Ram-Mohan, J. Sullivan, T. Zhou, D. R. Hines, and S. A. Solin.
+        Finite-element modeling of extraordinary magnetoresistance in thin film semiconductors with metallic inclusions.
+        \emph{Physical Review B}, 64:184410 (2001). \doi{10.1103/PhysRevB.64.184410}.
+
+\end{bibsection}
+
+\section{Unpublished Work} \begin{bibsection}
+
+    \item \textbf{Moussa, J. E.}. Measurement-Based Quantum Metropolis Algorithm.
+    \href{https://arxiv.org/abs/1903.01451}{arXiv:1903.01451} (2019).
+
+    \item \textbf{Moussa, J. E.} and A. D. Baczewski. Assessment of localized and randomized algorithms for electronic structure.
+    \href{https://arxiv.org/abs/1812.05264}{arXiv:1812.05264} (2018).
+
+   \item L. Shulenburger, A. D. Baczewski, S. M. Foiles, A. E. Wills, N. A. Modine, \textbf{J. E. Moussa}, P. A. Schultz, V. Tikare, and A. F. Wright.
+   Next-Generation Electronic Structure Codes. Sandia Technical Report SAND2016-9782 (2016).
+
+    \item \textbf{Moussa, J. E.}. Linear embedding of free energy minimization.
+    \href{https://arxiv.org/abs/1603.05180}{arXiv:1603.05180} (2016).
+
+    \item Metodi, T. S. , A. J. Landahl, C. Ryan-Anderson, M. S. Carroll, \textbf{J. E. Moussa}, and R. P. Muller.
+    SEQIS Late Start LDRD: Final Report - Robust Quantum Operations. Sandia Technical Report SAND2015-10754 (2015).
+
+    \item \textbf{Moussa, J. E.} and A. D. Baczewski. Comment on ``Self-Averaging Stochastic Kohn-Sham Density-Functional Theory''.
+     \href{http://arxiv.org/abs/1311.6576}{arXiv:1311.6576} (2013).
+
+    \item \textbf{Moussa, J. E.}. Comment on ``Adiabatic Quantum Algorithm for Search Engine Ranking''.
+     \href{http://arxiv.org/abs/1310.6676}{arXiv:1310.6676} (2013).
+
+    \item \textbf{Moussa, J. E.} and P. A. Schultz. Accurate numerical integration of an electron exchange hole with a screened Coulomb interaction.
+     \href{http://arxiv.org/abs/1210.8233}{arXiv:1210.8233} (2012).
+     
+    \item \textbf{Moussa, J. E.}. Generalized unitary Bogoliubov transformation that breaks fermion number parity.
+    \href{https://arxiv.org/abs/1208.1086}{arXiv:1208.1086} (2012).
+
+    \item \textbf{Moussa, J. E.}. Approximate diagonalization method for many-fermion Hamiltonians. \href{http://arxiv.org/abs/1003.2596}{arXiv:1003.2596} (2010).
+ 
+    \item \textbf{Moussa, J. E.}. Perfect algebraic coarsening. \href{http://arxiv.org/abs/math/0505157}{arXiv:math/0505157} (2005).
+
+\end{bibsection}
+
+\section{Awarded Grants} \begin{bibsection}
+
+    \item \textbf{Moussa, J. E.} and M. Sarovar. Realizing the Power of Near-Term Quantum Technologies. 0.6 FTE for 2 years.
+    \emph{Sandia National Labs' Laboratory Directed Research and Development Program, Defense Systems and Assessments Mission Area} (2015).
+
+\end{bibsection}
+
+\section{Proposed Grants} \begin{bibsection}
+
+    \item \textbf{Moussa, J. E.}. Random phase approximation: models and algorithms for electron correlation. \emph{Basic Energy Sciences, DOE Early Career Research Program} (2014).
+
+\end{bibsection}
+
+\section{Invited Talks} \begin{bibsection}
+
+  \item \textbf{Moussa, J. E.}. Local reduction of Hermitian eigenproblems. \emph{2017 Meeting of the International Linear Algebra Society}
+  (July 24, 2017).
+
+  \item \textbf{Moussa, J. E.}. Designing shallow donors in diamond. \emph{March Meeting of the American Physical Society}
+  (March 4, 2015).
+
+  \item \textbf{Moussa, J. E.}. Interdisciplinary Perspectives on Electronic Structure Theory. \emph{Scuseria research group, Rice University}
+  (January 8, 2014).
+
+  \item \textbf{Moussa, J. E.}. Eigensolvers in Condensed Matter Physics, Condensed Matter Physics in Eigensolvers. \emph{Computer Science Research Institute, Sandia National Laboratories}
+  (March 29, 2011).
+  
+  \item Chelikowsky, J. R. and \textbf{J. E. Moussa}. Algorithms for the Quantum Modeling of the Properties of Nanocrystals, Nanofilms, and Nanowires.
+   \emph{SIAM Conference on Computational Science and Engineering} (March 4, 2009).
+  
+\end{bibsection}
+
+\section{Contributed Talks} \begin{bibsection}
+
+ \item \textbf{Moussa, J. E.}. Testing, analysis, and refinement of the quantum Metropolis algorithm. \emph{March Meeting of the American Physical Society}
+  (March 5, 2019).
+
+ \item \textbf{Moussa, J. E.}.  Localized and Randomized Algorithms for Electronic Structure. \emph{March Meeting of the American Physical Society}
+  (March 7, 2018).
+
+ \item \textbf{Moussa, J. E.}. Transversal Clifford gates on folded surface codes. \emph{March Meeting of the American Physical Society}
+  (March 16, 2017).
+
+ \item \textbf{Moussa, J. E.}. Convex Lower Bounds for Free Energy Minimization. \emph{March Meeting of the American Physical Society}
+  (March 16, 2016).
+
+ \item \textbf{Moussa, J. E.}. Quantum Simulation: Classical Algorithms Versus Analog Simulators. \emph{March Meeting of the American Physical Society}
+  (March 3, 2015).
+
+ \item \textbf{Moussa, J. E.}. Maximum entropy quantum simulation. \emph{XXVI IUPAP Conference on Computational Physics}
+  (August 13, 2014).
+
+ \item \textbf{Moussa, J. E.}. Acceleration of screened-exchange density-functional calculations with approximate differential overlap. \emph{March Meeting of the American Physical Society}
+  (March 4, 2014).
+
+ \item \textbf{Moussa, J. E.}. Cubic-scaling algorithm and self-consistent mean field for the random-phase approximation with second-order screened exchange. \emph{March Meeting of the American Physical Society}
+  (March 18, 2013).
+
+ \item \textbf{Moussa, J. E.}, P. A. Schultz, and J. R. Chelikowsky. Retrofit of the HSE density functional. \emph{March Meeting of the American Physical Society} (February 27, 2012).
+
+ \item \textbf{Moussa, J. E.} and J. R. Chelikowsky. Size-dependence of electronic and optical properties of armchair graphene nanoislands. \emph{March Meeting of the American Physical Society} (March 23, 2011).
+
+ \item \textbf{Moussa, J. E.} and J. R. Chelikowsky. The Truncated Eigenfermion Decomposition applied to the Hubbard model. \emph{March Meeting of the American Physical Society} (March 15, 2010).
+
+ \item \textbf{Moussa, J. E.} and J. R. Chelikowsky. A Brief Introduction to the Truncated Eigenfermion Decomposition. \emph{March Meeting of the American Physical Society} (March 17, 2009).
+
+ \item \textbf{Moussa, J. E.} and M. L. Cohen. Constraints on $T_c$ for superconductivity in heavily boron-doped diamond. \emph{March Meeting of the American Physical Society} (March 11, 2008).
+
+ \item \textbf{Moussa, J. E.} and M. L. Cohen. Possibility of superconductivity in high pressure phases of BC$_3$. \emph{March Meeting of the American Physical Society} (March 6, 2007).
+
+ \item \textbf{Moussa, J. E.} and M. L. Cohen. Stability Constraints and Local Criteria for the Bounds on $T_c$ of Conventional Superconductors. \emph{March Meeting of the American Physical Society} (March 16, 2006).
+
+ \item \textbf{Moussa, J. E.} and M. L. Cohen. Compact representation of the Green function of an infinite periodic system. \emph{March Meeting of the American Physical Society} (March 23, 2005).
+
+\end{bibsection}
+
+\section{Patents} \begin{bibsection}
+    \item Hine, D. R., S. A. Solin, T. Zhou, \textbf{J. E. Moussa}, L. R. Ram-Mohan, J. M. Sullivan Jr.
+          Method and system for finite element modeling and simulation of enhanced magnetoresistance in thin film semiconductors with metallic inclusions. U.S. Patent \#6,937,967 (2005).
+\end{bibsection}
+
+\section{Referee for Journals} \begin{loneinnerlist}
+    \item \emph{Physical Review B}
+    \item \emph{Physical Review Letters}
+    \item \emph{The Journal of Chemical Physics}
+    \item \emph{Mathematical Reviews}
+\end{loneinnerlist}
+
+\section{Awards} \begin{loneinnerlist}
+%
+    \item \emph{Salisbury Prize}, Worcester Polytechnic Institute (2001).
+
+    \item \emph{Employee Recognition Award}, Enceladus: Quantum Computer Benchmarking Team, Sandia National Laboratories (2016).
+\end{loneinnerlist}
+
+\section{Teaching Experience}
+\href{http://www.berkeley.edu}{\textbf{The University of California at Berkeley}},
+Berkeley, CA USA
+\begin{outerlist}
+
+\item[] \textit{Graduate Student Instructor}%
+    \hfill \textbf{September 2002 to December 2002}
+\end{outerlist}
+
+\section{Programming Skills}
+%
+ C, C++, Fortran, Perl, Python, \TeX{}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
