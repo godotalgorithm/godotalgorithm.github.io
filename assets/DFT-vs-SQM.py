@@ -16,7 +16,7 @@ plt.semilogy(year, dft_vasp, color = 'black', ls=':',label='DFT (VASP)')
 plt.semilogy(year, sqm_mopac, color = 'red', ls=':',label='SQM (MOPAC)')
 plt.title('scientific publications: DFT vs. semiempirical quantum mechanics (SQM)')
 plt.xlabel('year')
-plt.ylabel('# of publications')
+plt.ylabel('# of publications per year')
 plt.legend()
 
 plt.savefig("DFT-vs-SQM.pdf",bbox_inches='tight',pad_inches=0.01)

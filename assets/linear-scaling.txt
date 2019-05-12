@@ -1,0 +1,35 @@
+# SEARCH 1: citation of "Direct calculation of electron density in density-functional theory" (first paper)
+# SEARCH 2: citation of "Linear scaling electronic structure methods" (last paper)
+# SEARCH 3: citation of "Density functional and density matrix method scaling linearly with the number of atoms" (famous paper)
+# SEARCH 4: "electronic structure" AND ("linear scaling" OR "scale linearly" OR "scaling linearly")
+# SEARCH 5: "electronic structure"
+
+1990   0   0   0    28   8710
+1991   2   0   0    33   9430
+1992   9   0   0    33   9930
+1993  17   0   0    48  10800
+1994  15   0   0    63  10700
+1995  28   0   0    82  11000  
+1996  29   0   4   151  13300
+1997  26   0  17   157  13600
+1998  32   0  19   185  14300
+1999  23   7  22   160  15700
+2000  17  50  26   268  17700
+2001  21  66  27   297  19500
+2002  25  63  24   368  21200
+2003  50  88  26   371  23000
+2004  32  78  29   451  27800
+2005  29  81  29   580  31900
+2006  53  96  41   715  39000
+2007  44  76  50   745  40200
+2008  56  82  47   907  49500
+2009  56  74  28   968  53200
+2010  47  57  41  1110  52500
+2011  47  61  39  1270  67400
+2012  50  62  53  1170  73000
+2013  53  56  32  1430  71500
+2014  49  50  47  1590  73800
+2015  39  61  37  1720  71700
+2016  47  69  62  1680  65700
+2017  37  61  41  1890  58300
+2018  45  52  48  2170  53700
