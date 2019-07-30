@@ -75,7 +75,7 @@ So, my interest in linear-scaling electronic structure ended up getting diverted
 Meanwhile, there haven't been any major advances in linear-scaling electronic structure research for the entire time that I've been interested in it.
 I've tried to rationalize and quantify this opinion by measuring publication rates in Google Scholar:
 
-![linear-scaling literature data](/assets/linear-scaling.pdf){:height="100%" width="100%"}
+![linear-scaling literature data](/assets/2019-05-12-linear-scaling.pdf){:height="100%" width="100%"}
 
 Here, I'm plotting papers mentioning ["electronic structure"] versus ["electronic structure" AND ("linear scaling" OR "scale linearly" OR "scaling linearly")],
  which shows that interest in linear scaling is growing with the activity in the field of electronic structure as a whole

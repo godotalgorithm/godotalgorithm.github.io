@@ -18,4 +18,4 @@ plt.xlabel('year')
 plt.ylabel('# of publications per year')
 plt.legend()
 
-plt.savefig("linear-scaling.pdf",bbox_inches='tight',pad_inches=0.01)
+plt.savefig("2019-05-12-linear-scaling.pdf",bbox_inches='tight',pad_inches=0.01)

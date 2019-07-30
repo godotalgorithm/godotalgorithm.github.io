@@ -109,7 +109,7 @@ I have used them both for multiple projects, and I have no major complaints abou
 To visualize their dominance and in turn the dominance of DFT over semiempirical electronic structure,
  I will display some trends in scientific publications related to electronic structure:
 
-![publications: DFT versus SQM](/assets/DFT-vs-SQM.pdf){:height="100%" width="100%"}
+![publications: DFT versus SQM](/assets/2019-04-18-DFT-vs-SQM.pdf){:height="100%" width="100%"}
 
 This is based on Google Scholar searches of ["density functional theory"] for DFT,
  [("semiempirical" OR "semi empirical") AND ("electronic structure" OR "chemistry" OR "quantum")] for semiempirical electronic structure,
