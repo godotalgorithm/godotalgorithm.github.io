@@ -23,7 +23,7 @@ group :jekyll_plugins do
 end
 
 # To deal with security vulnerability:
-gem "nokogiri", ">= 1.10.4"
+gem "nokogiri", ">= 1.10.8"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
