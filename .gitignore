@@ -2,7 +2,7 @@ _site
 .sass-cache
 .jekyll-metadata
 
-.out
-.aux
-.log
-.gz
+*.out
+*.aux
+*.log
+*.gz
